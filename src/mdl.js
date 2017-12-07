@@ -194,6 +194,6 @@ export class MDLCustomAttribute {
      * MDL does not truly degrades elements: https://github.com/google/material-design-lite/issues/4209
      * so degrading in fact causing double upgrade on next attach.
      */
-    // downgradeElement(this.element);
+    downgradeElement(this.element);
   }
 }

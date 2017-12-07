@@ -225,7 +225,9 @@ var MDLCustomAttribute = exports.MDLCustomAttribute = (_dec = (0, _aureliaFramew
     upgradeElement(this.element, this.value);
   };
 
-  MDLCustomAttribute.prototype.detached = function detached() {};
+  MDLCustomAttribute.prototype.detached = function detached() {
+    downgradeElement(this.element);
+  };
 
   return MDLCustomAttribute;
 }()) || _class) || _class);
