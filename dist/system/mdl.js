@@ -29,6 +29,22 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
     }
   }
 
+  function isUpgradedToRipple(element) {
+    var dataUpgraded = element.getAttribute('data-upgraded');
+    if (dataUpgraded === null) return false;
+
+    var upgradedList = dataUpgraded.split(',');
+    return upgradedList.indexOf('MaterialRipple') !== -1;
+  }
+
+  function getRippleContainer(element) {
+    for (var i = 0; i < element.childNodes.length; i++) {
+      if (element.childNodes[i].className && element.childNodes[i].className.indexOf("__ripple-container") !== -1) {
+        return element.childNodes[i];
+      }
+    }
+  }
+
   function upgradeElement(element, type) {
     var _ref = mdlTypes[type] || {},
         html = _ref.html,
@@ -85,6 +101,10 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
   }
 
   function downgradeElement(element) {
+    if (isUpgradedToRipple(element)) {
+      var rippleContainer = getRippleContainer(element);
+      componentHandler.downgradeElements(rippleContainer);
+    }
     componentHandler.downgradeElements(element);
   }
 

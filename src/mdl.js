@@ -158,6 +158,23 @@ function manageRipple(element) {
   }
 }
 
+function isUpgradedToRipple(element) {
+  let dataUpgraded = element.getAttribute('data-upgraded');
+  if(dataUpgraded === null)
+    return false;
+
+  let upgradedList = dataUpgraded.split(',');
+  return upgradedList.indexOf('MaterialRipple') !== -1;
+}
+
+function getRippleContainer(element) {
+  for (var i = 0; i < element.childNodes.length; i++) {
+    if (element.childNodes[i].className && element.childNodes[i].className.indexOf("__ripple-container") !== -1) {
+      return element.childNodes[i];
+    }        
+  }
+}
+
 function upgradeElement(element, type) {
   let {html, fct, js} = (mdlTypes[type] || {});
   if (html) {
@@ -170,6 +187,10 @@ function upgradeElement(element, type) {
 }
 
 function downgradeElement(element) {
+  if(isUpgradedToRipple(element)){
+    let rippleContainer = getRippleContainer(element);
+    componentHandler.downgradeElements(rippleContainer);
+  }
   componentHandler.downgradeElements(element);
 }
 
