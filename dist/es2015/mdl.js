@@ -175,7 +175,9 @@ function upgradeElement(element, type) {
 function downgradeElement(element) {
   if (isUpgradedToRipple(element)) {
     let rippleContainer = getRippleContainer(element);
-    componentHandler.downgradeElements(rippleContainer);
+    if (rippleContainer) {
+      componentHandler.downgradeElements(rippleContainer);
+    }
   }
   componentHandler.downgradeElements(element);
 }

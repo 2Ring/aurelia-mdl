@@ -229,7 +229,9 @@ function upgradeElement(element, type) {
 function downgradeElement(element) {
   if (isUpgradedToRipple(element)) {
     var rippleContainer = getRippleContainer(element);
-    _encapsulatedMdl.componentHandler.downgradeElements(rippleContainer);
+    if (rippleContainer) {
+      _encapsulatedMdl.componentHandler.downgradeElements(rippleContainer);
+    }
   }
   _encapsulatedMdl.componentHandler.downgradeElements(element);
 }

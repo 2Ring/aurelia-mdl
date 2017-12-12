@@ -103,7 +103,9 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
   function downgradeElement(element) {
     if (isUpgradedToRipple(element)) {
       var rippleContainer = getRippleContainer(element);
-      componentHandler.downgradeElements(rippleContainer);
+      if (rippleContainer) {
+        componentHandler.downgradeElements(rippleContainer);
+      }
     }
     componentHandler.downgradeElements(element);
   }

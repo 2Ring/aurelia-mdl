@@ -1,5 +1,5 @@
-import {inject, customAttribute, DOM} from 'aurelia-framework';
-import {componentHandler} from 'encapsulated-mdl';
+import { inject, customAttribute, DOM } from 'aurelia-framework';
+import { componentHandler } from 'encapsulated-mdl';
 
 let mdlTypes = {
   badge: {
@@ -160,7 +160,7 @@ function manageRipple(element) {
 
 function isUpgradedToRipple(element) {
   let dataUpgraded = element.getAttribute('data-upgraded');
-  if(dataUpgraded === null)
+  if (dataUpgraded === null)
     return false;
 
   let upgradedList = dataUpgraded.split(',');
@@ -171,12 +171,12 @@ function getRippleContainer(element) {
   for (var i = 0; i < element.childNodes.length; i++) {
     if (element.childNodes[i].className && element.childNodes[i].className.indexOf("__ripple-container") !== -1) {
       return element.childNodes[i];
-    }        
+    }
   }
 }
 
 function upgradeElement(element, type) {
-  let {html, fct, js} = (mdlTypes[type] || {});
+  let { html, fct, js } = (mdlTypes[type] || {});
   if (html) {
     for (let h of html) {
       element.classList.add(h);
@@ -187,9 +187,11 @@ function upgradeElement(element, type) {
 }
 
 function downgradeElement(element) {
-  if(isUpgradedToRipple(element)){
+  if (isUpgradedToRipple(element)) {
     let rippleContainer = getRippleContainer(element);
-    componentHandler.downgradeElements(rippleContainer);
+    if (rippleContainer) {
+      componentHandler.downgradeElements(rippleContainer);
+    }
   }
   componentHandler.downgradeElements(element);
 }
