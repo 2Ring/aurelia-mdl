@@ -235,6 +235,24 @@ define(['exports', 'aurelia-framework', 'encapsulated-mdl'], function (exports, 
       }
     }
     _encapsulatedMdl.componentHandler.downgradeElements(element);
+    if (element["MaterialMenu"]) {
+      downgradeMaterialMenu(element["MaterialMenu"]);
+    }
+  }
+
+  function downgradeMaterialMenu(materialMenu) {
+    materialMenu.container_.parentElement.insertBefore(materialMenu.element_, materialMenu.container_);
+    materialMenu.container_.parentElement.removeChild(materialMenu.container_);
+
+    var clone = materialMenu.forElement_.cloneNode();
+    while (materialMenu.forElement_.firstChild) {
+      clone.appendChild(materialMenu.forElement_.lastChild);
+    }
+    materialMenu.forElement_.parentNode.replaceChild(clone, materialMenu.forElement_);
+
+    materialMenu.forElement_ = undefined;
+    materialMenu.container_ = undefined;
+    materialMenu = undefined;
   }
 
   var MDLCustomAttribute = exports.MDLCustomAttribute = (_dec = (0, _aureliaFramework.inject)(_aureliaFramework.DOM.Element), _dec2 = (0, _aureliaFramework.customAttribute)('mdl'), _dec(_class = _dec2(_class = function () {
