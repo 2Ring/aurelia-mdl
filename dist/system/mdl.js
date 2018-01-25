@@ -111,6 +111,9 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
     if (element["MaterialMenu"]) {
       downgradeMaterialMenu(element["MaterialMenu"]);
     }
+    if (element["MaterialSpinner"]) {
+      downgradeMaterialSpinner(element["MaterialSpinner"]);
+    }
   }
 
   function downgradeMaterialMenu(materialMenu) {
@@ -126,6 +129,13 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
     materialMenu.forElement_ = undefined;
     materialMenu.container_ = undefined;
     materialMenu = undefined;
+  }
+
+  function downgradeMaterialSpinner(materialSpinner) {
+    while (materialSpinner.element_.hasChildNodes()) {
+      materialSpinner.element_.removeChild(materialSpinner.element_.lastChild);
+    }
+    materialSpinner = undefined;
   }
 
   return {

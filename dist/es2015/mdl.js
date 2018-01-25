@@ -183,6 +183,9 @@ function downgradeElement(element) {
   if (element["MaterialMenu"]) {
     downgradeMaterialMenu(element["MaterialMenu"]);
   }
+  if (element["MaterialSpinner"]) {
+    downgradeMaterialSpinner(element["MaterialSpinner"]);
+  }
 }
 
 function downgradeMaterialMenu(materialMenu) {
@@ -198,6 +201,13 @@ function downgradeMaterialMenu(materialMenu) {
   materialMenu.forElement_ = undefined;
   materialMenu.container_ = undefined;
   materialMenu = undefined;
+}
+
+function downgradeMaterialSpinner(materialSpinner) {
+  while (materialSpinner.element_.hasChildNodes()) {
+    materialSpinner.element_.removeChild(materialSpinner.element_.lastChild);
+  }
+  materialSpinner = undefined;
 }
 
 export let MDLCustomAttribute = (_dec = inject(DOM.Element), _dec2 = customAttribute('mdl'), _dec(_class = _dec2(_class = class MDLCustomAttribute {
