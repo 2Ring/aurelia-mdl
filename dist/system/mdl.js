@@ -114,6 +114,10 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
     if (element["MaterialSpinner"]) {
       downgradeMaterialSpinner(element["MaterialSpinner"]);
     }
+    if (element["MaterialButton"]) {
+      downgradeMaterialButton(element["MaterialButton"]);
+      element["MaterialButton"] = undefined;
+    }
   }
 
   function downgradeMaterialMenu(materialMenu) {
@@ -136,6 +140,11 @@ System.register(['aurelia-framework', 'encapsulated-mdl'], function (_export, _c
       materialSpinner.element_.removeChild(materialSpinner.element_.lastChild);
     }
     materialSpinner = undefined;
+  }
+
+  function downgradeMaterialButton(materialButton) {
+    materialButton.element_.removeEventListener('mouseup', materialButton.boundButtonBlurHandler);
+    materialButton.element_.removeEventListener('mouseleave', materialButton.boundButtonBlurHandler);
   }
 
   return {

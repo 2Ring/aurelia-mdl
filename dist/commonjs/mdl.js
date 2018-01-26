@@ -240,6 +240,10 @@ function downgradeElement(element) {
   if (element["MaterialSpinner"]) {
     downgradeMaterialSpinner(element["MaterialSpinner"]);
   }
+  if (element["MaterialButton"]) {
+    downgradeMaterialButton(element["MaterialButton"]);
+    element["MaterialButton"] = undefined;
+  }
 }
 
 function downgradeMaterialMenu(materialMenu) {
@@ -262,6 +266,11 @@ function downgradeMaterialSpinner(materialSpinner) {
     materialSpinner.element_.removeChild(materialSpinner.element_.lastChild);
   }
   materialSpinner = undefined;
+}
+
+function downgradeMaterialButton(materialButton) {
+  materialButton.element_.removeEventListener('mouseup', materialButton.boundButtonBlurHandler);
+  materialButton.element_.removeEventListener('mouseleave', materialButton.boundButtonBlurHandler);
 }
 
 var MDLCustomAttribute = exports.MDLCustomAttribute = (_dec = (0, _aureliaFramework.inject)(_aureliaFramework.DOM.Element), _dec2 = (0, _aureliaFramework.customAttribute)('mdl'), _dec(_class = _dec2(_class = function () {
