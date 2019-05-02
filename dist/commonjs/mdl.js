@@ -250,11 +250,13 @@ function downgradeMaterialMenu(materialMenu) {
   materialMenu.container_.parentElement.insertBefore(materialMenu.element_, materialMenu.container_);
   materialMenu.container_.parentElement.removeChild(materialMenu.container_);
 
-  var clone = materialMenu.forElement_.cloneNode();
-  while (materialMenu.forElement_.firstChild) {
-    clone.appendChild(materialMenu.forElement_.lastChild);
+  if (materialMenu.forElement_) {
+    var clone = materialMenu.forElement_.cloneNode();
+    while (materialMenu.forElement_.firstChild) {
+      clone.appendChild(materialMenu.forElement_.lastChild);
+    }
+    materialMenu.forElement_.parentNode.replaceChild(clone, materialMenu.forElement_);
   }
-  materialMenu.forElement_.parentNode.replaceChild(clone, materialMenu.forElement_);
 
   materialMenu.forElement_ = undefined;
   materialMenu.container_ = undefined;
